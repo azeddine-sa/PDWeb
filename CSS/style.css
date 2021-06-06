@@ -1,0 +1,107 @@
+*{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif}
+body{
+	margin-bottom:0;
+	padding:0;
+	background-color:#333;
+	color:#CCC;
+	text-align:center;
+}
+nav{font-size:20px}
+form{
+	padding-top:20px;
+	padding-bottom:20px;
+	margin:auto;
+	text-align:left;
+	width:600px;
+}
+
+input,
+button{
+	display:block;
+	background:none;
+	padding:10px;
+	font:12pt arial;
+	color:#888;
+	border:solid 1px #888;
+	outline:none;
+	width:400px;
+	margin-top:6px;
+	margin-bottom:16px;
+}
+input[type="submit"], 
+button{
+	background-color:#343a40;
+	border-color:#343a40;
+	color:#FFF;
+}
+input[type='checkbox']{
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	margin:0;
+	vertical-align: bottom;
+	position: relative;
+	top: -1px;
+	*overflow: hidden;
+}
+input[name='msg']{
+	width: 90% !important;
+	margin-left: 10px !important;
+}
+
+label{
+	display: block;
+	padding-left: 15px;
+	text-indent: -15px;
+	align-items: center;
+}
+
+/*shop*/
+.p_pprod{height: 50px;alignment: center;line-height:1em; font-size:medium;}
+
+
+/*id perso */
+#message{
+	text-align:left;
+	padding:20px;
+	background-color:#800;
+	border-top:dashed 1px #AAA;
+	border-bottom:dashed 1px #AAA;
+	color:white;
+}
+
+.p_form{padding: 0px!important; width: auto !important;}
+.p_button,.p_input{width:120px!important;}
+.p_input2{width: auto;}
+.p_inputindex{width: 20px;}
+.p_logosize{width: 35px;}
+.p_minCorpSize{min-height: 400px;}
+.p_sizeImgShop{width: 5px; height: 5px;}
+
+
+.p_forminscription{
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/*blog class perso */
+.p_blog{
+	 width: 60%;
+	 margin-bottom: 2px;
+	 background-color: darkslategrey;
+	 color: #333;
+}
+.divblog{width:70%;	margin:auto}
+.blogtitre{background-color:cadetblue;color: white}
+.blogcontenu{background-color:rgba(95,158,160,0.4);color: black}
+.titreArtBlog{background-color:cadetblue}
+
+/*minichat class perso */
+.minichat{position:relative;min-height:320px;border-style: solid;
+	margin:1rem; margin-bottom: 0rem; padding-left: 1rem}
+.minichatmsg{position:absolute;bottom:0; padding-bottom: 0px; font-size: small;
+	line-height: normal; padding-right: 2rem}
+
+.p_pprod{height: 50px;text-align: center;}
+

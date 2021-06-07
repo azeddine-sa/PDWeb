@@ -91,20 +91,18 @@
                 </div>
                 <!-- Partie droite : (de)connexion -->
                 <div class="col-2 pr-5 text-right align-middle">
+                    <a href="panier.php">
+                        <img src="../SRC/img/icon-panier.png" alt="mon panier" class="p_logosize"/>
+                    </a>
                 <?php
                     //Si l'utilisateur n'est pas connecté, logo de connexion
                     if($autoriser!="oui"){ ?>
-                        
                         <a href="login.php">
                             <img src="../SRC/img/icon-user.png" alt="icon user" class="p_logosize"/>
                         </a>
                     <?php } 
                     //Si l'utilisateur est connecté, logo de deconnexion
                     else{ ?>
-                        <a href="panier.php">
-                            <img src="../SRC/img/icon-panier.png" alt="mon panier" class="p_logosize"/>
-                        </a>
-                        
                         <a href="logout.php">
                             <img src="../SRC/img/log-out.png" alt="icon logout" class="p_logosize"/>
                         </a>

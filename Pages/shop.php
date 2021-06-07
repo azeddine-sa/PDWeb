@@ -16,20 +16,16 @@ require("./PHP/codeshop.php");
     <h1 class="text-center align-middle text-black">E-Shop</h1>
 
     <?php
-
-
     foreach ($req as $key=>$value){?>
        <h3><?= "{$key}" ?></h3>
         <div class="row m-1 p-1">
             <?php while($prod=$value->fetch()){ ?>
                 <div class="col-sm-3 col-md-2 p-2 border">
-                    <?php $i = 1; ?>
-                    <p class=p_pprod"><?= $prod["nom"]; ?> </p>
+                    <p class="p_pprod"><?= $prod["nom"]; ?> </p>
                     <!-- <p class="text-center">Description<br/> <?php echo substr($prod["description"],0,90).'...';; ?> </p> -->
                     <div>
                         <img src="<?= $prod["img"]; ?>" class="img-thumbnail" alt="" name="prod">
                         <p class="text-center text-danger"><?= number_format($prod["prixunitaire"],2).'€'; ?></p>
-                        <?php $i++; ?>
                     </div>
                 </div>
             <?php } ?>

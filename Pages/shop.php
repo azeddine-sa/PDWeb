@@ -60,7 +60,7 @@ require("./PHP/codeshop.php");
 foreach ($id as $value){
     $a='ok'.$value;
     if(isset($_POST[$a])){
-        @$nb=$_POST['nb'];;
+        @$nb=$_POST['nb'];
         @$total=($_POST['nb']*$prod['prixunitaire']);
         @$_SESSION['nb_tot_art']+=$nb;
         @$_SESSION['tot_achat']+=$total;

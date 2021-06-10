@@ -1,7 +1,23 @@
     <!-- Header avec class BS -->
     <?php
+    session_start();
         require("./PHP/codeconnexionindex.php");
         include_once("./Commons/header.php");
+        require_once 'Commons/connexionBdd.php';
+
+    $_SESSION['nb_tot_art'] = 0;
+    $_SESSION['tot_achat'] = 0;
+    //recupere les articles et leur prix
+    $prod=$bdd->prepare("SELECT * From produits");
+    //execute la requete
+    $prod->execute();
+    $init = array();
+    while ($value=$prod->fetch()){
+        $id=$value['id_produit'];
+        $init[$id]=0;
+    }
+    $_SESSION['panier'] = $init;
+
     ?>
     <title> Acceuil </title>
 

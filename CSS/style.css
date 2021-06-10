@@ -73,10 +73,17 @@ label{
 .p_form{padding: 0px!important; width: auto !important;}
 .p_button,.p_input{width:120px!important;}
 .p_input2{width: auto;}
+.p_input3{
+	height: 30px!important;
+	width: 150px!important;
+	font-size: 14px;
+	padding: 0px;
+}
 .p_inputindex{width: 20px;}
 .p_logosize{width: 35px;}
 .p_minCorpSize{min-height: 400px;}
-.p_sizeImgShop{width: 5px; height: 5px;}
+.p_sizeImgShop{width: 150px; height: 150px;}
+.p_sizeImgDelete{width: 25px; height: 25px; }
 
 
 .p_forminscription{

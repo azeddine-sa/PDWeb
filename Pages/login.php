@@ -1,7 +1,9 @@
 <title> Connexion </title>
 
 <!-- Header avec class BS -->
-<?php require("./PHP/codeconnexion.php"); include_once("./Commons/header.php"); ?>
+<?php session_start();
+require("./PHP/codeconnexion.php");
+include_once("./Commons/header.php"); ?>
 
 <!-- Contenu du site-->
 <div class="border m-2 p-2">

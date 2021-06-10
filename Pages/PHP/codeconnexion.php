@@ -1,5 +1,6 @@
 <?php
-session_start();
+@session_start();
+require_once 'Commons/connexionBdd.php';
 
 //Si l'utilisateur est connecté, redirection vers index.php
 if(@$_SESSION["autoriser"]=="oui"){
@@ -17,7 +18,6 @@ $message="";
 //Si bouton se connecter appuyer
 if(isset($valider))
 {
-    require_once 'Commons/connexionBdd.php';
 
     $requete = $bdd->prepare('SELECT * FROM pdweb.users WHERE email=:email');
     $requete->execute(array('email'=>$email ));
@@ -91,7 +91,6 @@ if(isset($valider))
 
         if($passwordIsOk)
         {
-            session_start();
             $_SESSION["autoriser"]="oui";
             $_SESSION['id'] = $result['id_user'];
             $_SESSION["nomPrenom"]=strtoupper($result["nom"]." ".$result["prenom"]);

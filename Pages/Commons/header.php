@@ -90,11 +90,17 @@
                     </nav>
                 </div>
                 <!-- Partie droite : (de)connexion -->
-                <div class="col-2 pr-5 text-right align-middle">
-                    <a href="panier.php">
-                        <img src="../SRC/img/icon-panier.png" alt="mon panier" class="p_logosize"/>
-                    </a>
                 <?php
+                    //logo panier
+                    if(($_SESSION['nb_tot_art']==0)){?>
+                        <a href="panier.php">
+                            <img src="../SRC/img/icon-panier.png" alt="mon panier" class="p_logosize"/>
+                        </a>
+                    <?php }else{ ?>
+                        <a href="panier.php">
+                            <img src="../SRC/img/icon-panier-plein.png" alt="mon panier" class="p_logosize"/>
+                        </a>
+                    <?php }
                     //Si l'utilisateur n'est pas connecté, logo de connexion
                     if($autoriser!="oui"){ ?>
                         <a href="login.php">

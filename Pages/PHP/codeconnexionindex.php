@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 
 //creation de variable reprenant les saisies utilisateur
 @$email=$_POST['email'];
@@ -85,7 +85,6 @@ if(isset($valider))
 
         if($passwordIsOk)
         {
-            session_start();
             $_SESSION["autoriser"]="oui";
             $_SESSION['id'] = $result['id_user'];
             $_SESSION["nomPrenom"]=strtoupper($result["nom"]." ".$result["prenom"]);

@@ -8,6 +8,7 @@ include_once("./Commons/header.php");
 include("./Commons/connexionBdd.php");
 
 require("./PHP/codeshop.php");
+
 ?>
 
 <!-- Contenu du site-->
@@ -61,7 +62,14 @@ foreach ($id as $value){
     $a='ok'.$value;
     if(isset($_POST[$a])){
         @$nb=$_POST['nb'];
-        @$total=($_POST['nb']*$prod['prixunitaire']);
+        @$reqpu=$bdd->prepare('SELECT prixunitaire FROM produits WHERE id_produit=?');
+        @$reqpu->execute(array($value));
+        @$tab=$reqpu->fetchAll();
+        @$pu = 0;
+        foreach ($tab as $valeur)
+            $pu=$valeur['prixunitaire'];
+
+        @$total=($nb*$pu);
         @$_SESSION['nb_tot_art']+=$nb;
         @$_SESSION['tot_achat']+=$total;
         @$_SESSION['panier'][$value]+=$nb;

@@ -5,6 +5,8 @@ include_once("./Commons/header.php");
 
 //connexion à la bd
 include("./Commons/connexionBdd.php");
+
+var_dump($_SESSION['tot_achat']);
 ?>
 <title> shop </title>
 
@@ -58,7 +60,7 @@ include("./Commons/connexionBdd.php");
                                 <?php }
                             }
                         }
-                    }?>
+                    } ?>
                         <tr class="text-center mt-auto mb-auto">
                             <td></td>
                             <td></td>
@@ -80,6 +82,7 @@ include("./Commons/connexionBdd.php");
     </div>
     <form method="post" action="panier_post.php">
         <input type="submit" value="Vider le panier" name='videpanier' class="p_input3 d-inline-block"/>
+        <input type="submit" value="Valider le panier" name='validerpanier' class="p_input3 d-inline-block"/>
     </form>
 
 </div>

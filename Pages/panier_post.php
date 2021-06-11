@@ -23,10 +23,12 @@ if ((isset($_POST['videpanier']))) {
 }
 
 if ((isset($_POST['validerpanier']))) {
+    //ajout de la facture dans la bd
     $totalachat = $_SESSION['tot_achat'];
     $fac = $bdd->prepare('INSERT INTO facture(user_id,prixtotal,dateachat) values (?,?,now()) ');
     $fac->execute(array($id_user, $totalachat));
 
+    //recuperer l'id de la facture ajouté au dessus
     $recidfac=$bdd->prepare('Select id_facture from facture ORDER BY dateachat DESC LIMIT 1');
     $recidfac->execute();
     $rid=$recidfac->fetchAll();
@@ -34,6 +36,7 @@ if ((isset($_POST['validerpanier']))) {
     foreach ($rid as $valeur)
         $idfac=$valeur['id_facture'];
 
+    //ajout des lignes factures dans la bd
     while ($p=$prod->fetch()){
         foreach ($_SESSION['panier'] as $key=>$value){
             if ($value!=0){
@@ -42,7 +45,6 @@ if ((isset($_POST['validerpanier']))) {
                     $prixligne = $value*$p['prixunitaire'];
                     $linefact->execute(array($idfac,$p['id_produit'],$value,$prixligne));
                 }
-
             }
         }
     }

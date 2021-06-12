@@ -2,11 +2,8 @@
 @session_start();
 //Header avec class BS
 include_once("./Commons/header.php");
-
 //connexion à la bd
 include("./Commons/connexionBdd.php");
-
-var_dump($_SESSION['tot_achat']);
 ?>
 <title> shop </title>
 
@@ -17,7 +14,9 @@ var_dump($_SESSION['tot_achat']);
     <h3>Votre panier</h3>
 
     <?php
+    //initialisation de la varibale totalpanier
     $totalpanier = 0;
+    //recupere tout les produits dans la bd
     $prod=$bdd->prepare("SELECT * From produits");
     //execute la requete
     $prod->execute(); ?>
@@ -35,10 +34,15 @@ var_dump($_SESSION['tot_achat']);
                     <th></th>
                 </tr>
                 </thead>
+                <!-- S'il y a au mons 1 article dans le panier -->
                 <?php if($_SESSION['nb_tot_art']!=0){
+                    //parcourir le tableau de tout les produits
                     while ($p=$prod->fetch()){
+                        //Pour chaque produit dans le panier clé=>valeur
                         foreach ($_SESSION['panier'] as $key=>$value){
+                            //Si le nombre d'article pour un produit est sup à 0
                             if ($value!=0){
+                                //Si l'id du produit correspond à la clé
                                 if($p['id_produit']==$key){?>
                                 <tbody>
                                     <tr class="text-center mt-auto mb-auto">
@@ -82,7 +86,9 @@ var_dump($_SESSION['tot_achat']);
     </div>
     <form method="post" action="panier_post.php">
         <input type="submit" value="Vider le panier" name='videpanier' class="p_input3 d-inline-block"/>
-        <input type="submit" value="Valider le panier" name='validerpanier' class="p_input3 d-inline-block"/>
+        <?php if($_SESSION["autoriser"]=="oui"){?>
+            <input type="submit" value="Valider le panier" name='validerpanier' class="p_input3 d-inline-block"/>
+        <?php } ?>
     </form>
 
 </div>

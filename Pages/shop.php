@@ -18,12 +18,17 @@ require("./PHP/codeshop.php");
 
     <?php
     $id=array();
+    //foreach sur $req qui est un tableau de 3 requetes dont chacune à une clé correspondant à la catégorie de l'article
+    //$req provient de codeshop.php
     foreach ($req as $key=>$value){?>
+        <!-- affiche chaque clé (informatiques,livres,hifi) -->
        <h3><?= "{$key}" ?></h3>
         <div class="row m-1 p-1">
+            <!-- $Values est un tableau de produits -->
             <?php while($prod=$value->fetch()){ ?>
                 <div class="col-sm-3 col-md-2 p-2 border">
                     <?php
+                    //variable qui reprend l'id
                     $idprod=$prod["id_produit"];
                     ?>
                     <p class="p_pprod"><?= $prod["nom"]; ?> </p>
@@ -48,7 +53,10 @@ require("./PHP/codeshop.php");
                         </select>
                         <input type="submit" value="Ajouter au panier" name='ok<?=$idprod?>' class="p_input3"/>
                     </form>
-                    <?php $id[]=$idprod; ?>
+                    <?php
+                        //création d'un tableau qui reprend tout les id afficher
+                        $id[]=$idprod;
+                    ?>
                 </div>
                 <?php
             } ?>
@@ -58,10 +66,13 @@ require("./PHP/codeshop.php");
 </div>
 
 <?php
+//Ajout au panier à la suite du post (l'utilisateur appuie sur ajouter un produit)
 foreach ($id as $value){
+    //varibale qui reprend chaque id qui correspond à la valeur "name" du input submit pour chaque produit
     $a='ok'.$value;
     if(isset($_POST[$a])){
         @$nb=$_POST['nb'];
+        //Recuperer le prix unitaire du produit dans la bd via l'id produit
         @$reqpu=$bdd->prepare('SELECT prixunitaire FROM produits WHERE id_produit=?');
         @$reqpu->execute(array($value));
         @$tab=$reqpu->fetchAll();

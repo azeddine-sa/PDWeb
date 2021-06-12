@@ -68,7 +68,8 @@
                                                 <a class="dropdown-item" href="../Pages/editnews.php">Ecrire une news</a>
                                                 <a class="dropdown-item" href="../Pages/umconsult.php">Consulter les profils UM</a>
                                                 <a class="dropdown-item" href="../Pages/umconnexion.php">Consulter les connexions d'un membre</a>
-                                                <a class="dropdown-item" href="#">Consulter la liste des achats d'un membre</a>
+                                                <a class="dropdown-item" href="../Pages/gestprod.php">Ajouter/Supprimer un produit</a>
+                                                <a class="dropdown-item" href="../Pages/umachatconsult.php">Consulter la liste des achats d'un membre</a>
                                                 <a class="dropdown-item" href="../Pages/session.php">Mon compte</a>
                                                 <a class="dropdown-item" href="../Pages/logout.php">Deconnexion</a>
                                             </div>
@@ -92,7 +93,7 @@
                 <!-- Partie droite : (de)connexion -->
                 <?php
                     //logo panier
-                    if(($_SESSION['nb_tot_art']==0)){?>
+                    if((@$_SESSION['nb_tot_art']==0)){?>
                         <a href="panier.php">
                             <img src="../SRC/img/icon-panier.png" alt="mon panier" class="p_logosize"/>
                         </a>

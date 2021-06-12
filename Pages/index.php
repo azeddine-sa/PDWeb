@@ -3,10 +3,18 @@
     session_start();
         require("./PHP/codeconnexionindex.php");
         include_once("./Commons/header.php");
-        require_once 'Commons/connexionBdd.php';
+        require_once ('Commons/connexionBdd.php');
 
-    $_SESSION['nb_tot_art'] = 0;
-    $_SESSION['tot_achat'] = 0;
+    //Si la variable de session nb tot article n'existe pas, initialisation à 0
+    if(!isset($_SESSION['nb_tot_art']))
+        $_SESSION['nb_tot_art'] = 0;
+    //Si la variable de session total achat n'existe pas, initialisation à 0
+    if(!isset($_SESSION['tot_achat']))
+        $_SESSION['tot_achat'] = 0;
+    //Si la variable de session nb tot article n'existe pas, initialisation à non
+    if(!isset($_SESSION['autoriser']))
+        $_SESSION['autoriser']='non';
+
     //recupere les articles et leur prix
     $prod=$bdd->prepare("SELECT * From produits");
     //execute la requete
@@ -16,7 +24,8 @@
         $id=$value['id_produit'];
         $init[$id]=0;
     }
-    $_SESSION['panier'] = $init;
+    if(!isset($_SESSION['panier']))
+        $_SESSION['panier'] = $init;
 
     ?>
     <title> Acceuil </title>

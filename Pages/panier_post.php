@@ -2,18 +2,21 @@
 @session_start();
 include("./Commons/connexionBdd.php");
 
+//recupere tout les produits de la bd
 $prod=$bdd->prepare("SELECT * From produits");
 //execute la requete
 $prod->execute();
 
-
+//initialisation de variable avec la valeur de la variable session id correspondant à l'id utilisateur
 $id_user = $_SESSION['id'];
 
+//supprime un article du panier
 if(isset($_GET['cle'])){
     $cle = $_GET['cle'];
     $_SESSION['panier'][$cle] = 0;
 }
 
+//vide la panier en réinitialisant la variable de session à 0 pour chaque produit
 if ((isset($_POST['videpanier']))) {
     foreach ($_SESSION['panier'] as $key => $value)
         $_SESSION['panier'][$key] = 0;
@@ -22,6 +25,7 @@ if ((isset($_POST['videpanier']))) {
     $_SESSION['total_achats'] = 0;
 }
 
+//Confirmation de l'achat (sans passage par un paiement)
 if ((isset($_POST['validerpanier']))) {
     //ajout de la facture dans la bd
     $totalachat = $_SESSION['tot_achat'];
@@ -36,21 +40,18 @@ if ((isset($_POST['validerpanier']))) {
     foreach ($rid as $valeur)
         $idfac=$valeur['id_facture'];
 
-    //ajout des lignes factures dans la bd
+    //ajout des lignes factures (pour chaque produit acheté) dans la bd
     while ($p=$prod->fetch()){
         foreach ($_SESSION['panier'] as $key=>$value){
             if ($value!=0){
                 if($p['id_produit']==$key){
                     $linefact = $bdd->prepare('INSERT INTO lignefacture(facture_id,produit_id,quantite,prixligne) values (?,?,?,?) ');
                     $prixligne = $value*$p['prixunitaire'];
-                    $linefact->execute(array($idfac,$p['id_produit'],$value,$prixligne));
+                    $linefact->execute(array($idfac,$key,$value,$prixligne));
                 }
             }
         }
     }
-
-
-
 }
 header("location:panier.php");
 ?>

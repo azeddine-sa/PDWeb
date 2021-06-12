@@ -9,10 +9,6 @@ $id = $_GET['id'];
 
 
 if(isset($valider)){
-
-    //connexion à la bd
-    include("Commons/connexionBdd.php");
-
     //preparation de la requete de recherche dans la base de donnée si login est deja existant
     $req=$bdd->prepare("INSERT into commentaires(news_id, user_id, commentaire, datecommentaire) values (?,?,?,now())");
 

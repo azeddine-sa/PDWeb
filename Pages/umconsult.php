@@ -2,7 +2,8 @@
 @session_start();
 
 //Header avec class BS
-include_once("./Commons/header.php");?>
+include_once("./Commons/header.php");
+include("Commons/connexionBdd.php");?>
 
 <title>Consulter les données des UM</title>
 
@@ -12,9 +13,6 @@ include_once("./Commons/header.php");?>
     <h1 class="text-center align-middle text-black">Consulter profil UM</h1>
 
     <?php
-    //connexion à la bd
-    include("Commons/connexionBdd.php");
-
     //preparation de la requete de recherche dans la base de donnée des produits
     $req=$bdd->prepare("SELECT * FROM users");
 

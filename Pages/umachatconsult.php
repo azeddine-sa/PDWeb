@@ -19,33 +19,29 @@ include("Commons/connexionBdd.php");?>
     @$loginsearch = $_POST['loginsearch'];
     @$valider = $_POST['valider'];
 
-    $J1 = Date('Y-m-d')." 00:00:00";
 
     if(isset($valider)){
         //si une des cases n'est pas remplie correctement, message ajouté à la variable &message
         if(empty($idsearch) && empty($emailsearch) && empty($loginsearch))
             $message="<li>Veuillez compléter le champ!</li>";
         if(empty($message)){
-        //preparation de la requete de recherche dans la base de donnée si login est deja existant
-        $req1 = $bdd->prepare("SELECT connexion.dateconnexion, users.email, users.login
-                                            FROM connexion
+            //preparation de la requete de recherche dans la base de donnée si login est deja existant
+            $req1 = $bdd->prepare("SELECT facture.prixtotal, facture.dateachat , users.email, users.login
+                                            FROM facture
                                             INNER JOIN users
-                                            ON connexion.user_id=users.id_user
-                                            WHERE connexion.dateconnexion>=:datecomp
-                                                AND connexion.user_id=:id
-                                            OR connexion.dateconnexion>=:datecomp
-                                                AND users.email=:email
-                                            OR connexion.dateconnexion>=:datecomp
-                                                AND users.login=:login");
+                                            ON facture.user_id=users.id_user
+                                            WHERE facture.user_id=:id
+                                            OR users.email=:email
+                                            OR users.login=:login
+                                            ORDER BY facture.dateachat DESC");
 
-        $req1->bindValue(':id', $idsearch);
-        $req1->bindValue(':email', $emailsearch);
-        $req1->bindValue(':login', $loginsearch);
-        $req1->bindValue(':datecomp', '2021-04-20 00:00:00');
-        $req1->execute();
+            $req1->bindValue(':id', $idsearch);
+            $req1->bindValue(':email', $emailsearch);
+            $req1->bindValue(':login', $loginsearch);
+            $req1->execute();
         } else{?>
             <div id="message">
-                <?php echo $message; echo $J1;?>
+                <?php echo $message;?>
             </div>
         <?php }
     }
@@ -83,19 +79,24 @@ include("Commons/connexionBdd.php");?>
     <table class="table table-sm table-responsive-sm table-striped">
         <thead>
         <tr>
-            <th scope="col">N° connexion</th>
-            <th scope="col">Date & heure de connexion</th>
+            <th scope="col-1"></th>
+            <th scope="col-5">Montant de l'achat</th>
+            <th scope="col-5">Date de l'achat</th>
+            <th scope="col-1">Détails</th>
+
         </tr>
         <tbody>
         <?php $i=1;
         if (empty($message) && isset($req1)){
-            while($con=$req1->fetch()) {
+            while($achat=$req1->fetch()) {
                 ?>
                 <tr>
                     <th scope="row"><?php echo $i?></th>
-                    <td><?php echo $con['dateconnexion'] ?></td>
+                    <td><?= $achat['prixtotal'].' €' ?></td>
+                    <td><?= $achat['dateachat'] ?></td>
+                    <td><?= "voir plus..." ?></td>
                 </tr>
-            <?php $i++;}
+                <?php $i++;}
         }
         ?>
         </tbody>

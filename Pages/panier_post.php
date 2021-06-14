@@ -27,30 +27,47 @@ if ((isset($_POST['videpanier']))) {
 
 //Confirmation de l'achat (sans passage par un paiement)
 if ((isset($_POST['validerpanier']))) {
-    //ajout de la facture dans la bd
-    $totalachat = $_SESSION['tot_achat'];
-    $fac = $bdd->prepare('INSERT INTO facture(user_id,prixtotal,dateachat) values (?,?,now()) ');
-    $fac->execute(array($id_user, $totalachat));
+    if ($_SESSION["autoriser"] == "oui") {
+        //ajout de la facture dans la bd
+        $totalachat = $_SESSION['tot_achat'];
+        $fac = $bdd->prepare('INSERT INTO facture(user_id,prixtotal,dateachat) values (?,?,now()) ');
+        $fac->execute(array($id_user, $totalachat));
 
-    //recuperer l'id de la facture ajouté au dessus
-    $recidfac=$bdd->prepare('Select id_facture from facture ORDER BY dateachat DESC LIMIT 1');
-    $recidfac->execute();
-    $rid=$recidfac->fetchAll();
-    $idfac = 0;
-    foreach ($rid as $valeur)
-        $idfac=$valeur['id_facture'];
+        //recuperer l'id de la facture ajouté au dessus
+        $recidfac=$bdd->prepare('Select id_facture from facture ORDER BY dateachat DESC LIMIT 1');
+        $recidfac->execute();
+        $rid=$recidfac->fetchAll();
+        $idfac = 0;
+        foreach ($rid as $valeur)
+            $idfac=$valeur['id_facture'];
 
-    //ajout des lignes factures (pour chaque produit acheté) dans la bd
-    while ($p=$prod->fetch()){
-        foreach ($_SESSION['panier'] as $key=>$value){
-            if ($value!=0){
-                if($p['id_produit']==$key){
-                    $linefact = $bdd->prepare('INSERT INTO lignefacture(facture_id,produit_id,quantite,prixligne) values (?,?,?,?) ');
-                    $prixligne = $value*$p['prixunitaire'];
-                    $linefact->execute(array($idfac,$key,$value,$prixligne));
+        //ajout des lignes factures (pour chaque produit acheté) dans la bd
+        while ($p=$prod->fetch()){
+            foreach ($_SESSION['panier'] as $key=>$value){
+                if ($value!=0){
+                    if($p['id_produit']==$key){
+                        $linefact = $bdd->prepare('INSERT INTO lignefacture(facture_id,produit_id,quantite,prixligne) values (?,?,?,?) ');
+                        $prixligne = $value*$p['prixunitaire'];
+                        $linefact->execute(array($idfac,$key,$value,$prixligne));
+                    }
                 }
             }
         }
+        //recupere les articles et leur prix
+        $prod=$bdd->prepare("SELECT * From produits");
+        //execute la requete
+        $prod->execute();
+        $init = array();
+        while ($value=$prod->fetch()){
+            $id=$value['id_produit'];
+            $init[$id]=0;
+        }
+        $_SESSION['panier'] = $init;
+        $_SESSION['nb_tot_art'] = 0;
+        $_SESSION['tot_achat'] = 0;
+    }else{
+        header("location:login.php");
+        exit();
     }
 }
 header("location:panier.php");

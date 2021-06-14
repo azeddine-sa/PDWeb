@@ -11,7 +11,7 @@ include("Commons/connexionBdd.php");?>
 <!-- Contenu du site-->
 <div class="border m-2 p-2 ">
 
-    <h1 class="text-center align-middle text-black">Consulter les factures d'un UM</h1>
+    <h1 class="text-center align-middle text-black">Consulter les 5 derniers commentaires d'un UM</h1>
 
     <?php
     @$idsearch = $_POST['idsearch'];
@@ -26,14 +26,15 @@ include("Commons/connexionBdd.php");?>
             $message="<li>Veuillez compléter le champ!</li>";
         if(empty($message)){
             //preparation de la requete de recherche dans la base de donnée si login est deja existant
-            $req1 = $bdd->prepare("SELECT facture.id_facture, facture.prixtotal, facture.dateachat , users.email, users.login
-                                            FROM facture
+            $req1 = $bdd->prepare("SELECT commentaires.commentaire, commentaires.datecommentaire, users.email, users.login
+                                            FROM commentaires
                                             INNER JOIN users
-                                            ON facture.user_id=users.id_user
-                                            WHERE facture.user_id=:id
+                                            ON commentaires.user_id=users.id_user
+                                            WHERE commentaires.user_id=:id
                                             OR users.email=:email
                                             OR users.login=:login
-                                            ORDER BY facture.dateachat DESC");
+                                            ORDER BY commentaires.datecommentaire DESC
+                                            LIMIT 5");
 
             $req1->bindValue(':id', $idsearch);
             $req1->bindValue(':email', $emailsearch);
@@ -75,26 +76,24 @@ include("Commons/connexionBdd.php");?>
         </div>
     </form>
 
-    <!--Affichage des achats-->
+    <!--Affichage des commentaires-->
     <table class="table table-sm table-responsive-sm table-striped">
         <thead>
         <tr>
-            <th scope="col-1"></th>
-            <th scope="col-5">Montant de l'achat</th>
-            <th scope="col-5">Date de l'achat</th>
-            <th scope="col-1">Détails</th>
+            <th scope="col-2"></th>
+            <th scope="col-5">Commentaire</th>
+            <th scope="col-5">Date du commentaire</th>
 
         </tr>
         <tbody>
         <?php $i=1;
         if (empty($message) && isset($req1)){
-            while($achat=$req1->fetch()) {
+            while($com=$req1->fetch()) {
                 ?>
                 <tr>
                     <th scope="row"><?php echo $i?></th>
-                    <td><?= $achat['prixtotal'].' €' ?></td>
-                    <td><?= $achat['dateachat'] ?></td>
-                    <td><a href="umachatconsultdet.php?idfac=<?=$achat['id_facture']?>&totfac=<?=$achat['prixtotal']?>" target="_blank"><?= "voir plus..." ?></a></td>
+                    <td><?= $com['commentaire'] ?></td>
+                    <td><?= $com['datecommentaire'] ?></td>
                 </tr>
                 <?php $i++;}
         }

@@ -58,7 +58,7 @@
                                     </div>
                                 </li>
                                 <?php
-                                    // Si l'utilisateur est connecté, ajout onglet "espace personnel" dans le menu
+                                    // Si l'utilisateur est un admin, ajout onglet "menu administration" dans le menu
                                     if($autoriser=="oui" && $_SESSION['status']==true){ ?>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,19 +68,24 @@
                                                 <a class="dropdown-item" href="../Pages/editnews.php">Ecrire une news</a>
                                                 <a class="dropdown-item" href="../Pages/umconsult.php">Consulter les profils UM</a>
                                                 <a class="dropdown-item" href="../Pages/umconnexion.php">Consulter les connexions d'un membre</a>
+                                                <a class="dropdown-item" href="../Pages/umcomconsult.php">Consulter les 5 derniers commentaires d'un membre</a>
                                                 <a class="dropdown-item" href="../Pages/gestprod.php">Ajouter/Supprimer un produit</a>
+                                                <a class="dropdown-item" href="../Pages/umconsultachat.php">Consulter mes achats</a>
                                                 <a class="dropdown-item" href="../Pages/umachatconsult.php">Consulter la liste des achats d'un membre</a>
                                                 <a class="dropdown-item" href="../Pages/session.php">Mon compte</a>
                                                 <a class="dropdown-item" href="../Pages/logout.php">Deconnexion</a>
                                             </div>
                                         </li>
-                                <?php } elseif ($autoriser=="oui" && $_SESSION['status']==false){ ?>
+                                <?php //Si l'utilisateur est connecté, ajout onglet "espace personnel" dans le menu
+                                    } elseif ($autoriser=="oui" && $_SESSION['status']==false){ ?>
+
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Espace Membre
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item" href="../Pages/session.php">Consulter/Modifier mon profil</a>
+                                                <a class="dropdown-item" href="../Pages/umconsultachat.php">Consulter mes achats</a>
                                                 <a class="dropdown-item" href="../Pages/session.php">Modifier mon mot de passe</a>
                                                 <a class="dropdown-item" href="../Pages/logout.php">Deconnexion</a>
                                             </div>

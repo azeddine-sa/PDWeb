@@ -86,9 +86,8 @@ include("./Commons/connexionBdd.php");
     </div>
     <form method="post" action="panier_post.php">
         <input type="submit" value="Vider le panier" name='videpanier' class="p_input3 d-inline-block"/>
-        <?php if($_SESSION["autoriser"]=="oui"){?>
-            <input type="submit" value="Valider le panier" name='validerpanier' class="p_input3 d-inline-block"/>
-        <?php } ?>
+        <input type="submit" value="Valider le panier" name='validerpanier' class="p_input3 d-inline-block"/>
+
     </form>
 
 </div>

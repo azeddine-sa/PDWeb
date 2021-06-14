@@ -63,7 +63,7 @@ include("Commons/connexionBdd.php");?>
     <form name="form2" method="post" action="" class="text-right p_form pt-2">
         <div class="form-group row">
             <label for="emailsearch" class="col-sm-4 col-form-label">Recherche via l'email UM :</label>
-            <input type="text" name="emailsearch" id="emailsearch" class="form-control col-sm-6" placeholder="Entrez un login">
+            <input type="text" name="emailsearch" id="emailsearch" class="form-control col-sm-6" placeholder="Entrez un email">
             <div class="col-sm-2">
                 <input type="submit" name="valider" value="Rechercher" class="p_input" />
             </div>

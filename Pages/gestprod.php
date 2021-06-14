@@ -4,7 +4,7 @@
 //Header avec class BS
 include_once("./Commons/header.php");
 include("./Commons/connexionBdd.php");
-include("./PHP/codegestprod.php")?>
+include("./PHP/codegestprod.php") ?>
 
 <title>Gestion des produits</title>
 

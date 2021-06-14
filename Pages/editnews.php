@@ -1,6 +1,8 @@
 <?php
 @session_start();
 
+include_once("./Commons/header.php");
+
 @$id_user = $_SESSION['id'];
 @$titre = $_POST['titre'];
 @$contenu = $_POST['contenu'];
@@ -24,8 +26,6 @@ if(isset($valider)){
         </div>
 <?php }
 ?>
-    <!-- Header avec class BS -->
-<?php include_once("./Commons/header.php"); ?>
 
     <div class="row border m-2 p-2">
 

@@ -1,5 +1,5 @@
 <?php require 'commons/header.php';
-require'Commons/connexionBdd.php'?>
+require 'Commons/connexionBdd.php' ?>
 <title>Modification du Profil</title>
 
 <?php

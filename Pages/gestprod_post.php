@@ -1,5 +1,5 @@
 <?php
-require_once ('Commons/connexionBdd.php');
+require_once('Commons/connexionBdd.php');
 
 @$type = $_POST['type'];
 @$nom = $_POST['nom'];

@@ -23,7 +23,7 @@ include("./PHP/codegestprod.php");
 <div class="row border m-2 p-2">
     <div class="col-6">
         <h3 class="text-center">Ajouter un produit</h3>
-        <form class="form" method="post" action="gestprod_post.php" enctype="multipart/form-data">
+        <form class="form" method="post" action="" enctype="multipart/form-data">
             <!-- Type de produit-->
             <div class="label">Type de produit : </div>
             <div class="form-check">

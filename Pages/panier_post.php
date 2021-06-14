@@ -65,6 +65,48 @@ if ((isset($_POST['validerpanier']))) {
         $_SESSION['panier'] = $init;
         $_SESSION['nb_tot_art'] = 0;
         $_SESSION['tot_achat'] = 0;
+
+        //envoie mail
+        require('PHPMailer/PHPMailerAutoload.php');
+
+        $mail = new PHPMailer();
+        //Mailer peut utilisé le protocole SMTP
+        $mail ->isSMTP();
+        //pour designer le serveur
+        $mail->Host='smtp.gmail.com';
+        //pour activer l'authentification SMTP
+        $mail->SMTPAuth=true;
+        $mail->Username='sa.ben.iccbxl@gmail.com';
+        $mail->Password='@zerty123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port=587;
+        //$mail->SMTPDebug = 3;
+
+        //on veut envpoyer nos mail à partir de cette adresse
+        $mail->setFrom('sa.ben.iccbxl@gmail.com', 'SA&BEN');
+        //adresse de destination
+        $mail->addAddress($_SESSION['email']);
+
+        //spécifié que l'email peut etre sous forme html
+        $mail->isHTML(true);
+
+        //spécifié l'objet de l'email
+        $mail->Subject='Validation de votre panier';
+
+        //spécifié le body de l'email
+        $mail->Body = 'Votre panier a bien été valider';
+
+        //test pour verifier si le mail a été bien envoyé
+        if(!$mail->send())
+        {
+            //si le mail n'a pas été envoyé
+            $message = "Mail non envoyé";
+            echo 'Erreurs:'.$mail->ErrorInfo;//pour afficher le type de l'erreur
+        }
+        else
+        {
+            $message1 =  "Nous vous avons envoyé un email de validation de votre panier.";
+        }
     }else{
         header("location:login.php");
         exit();

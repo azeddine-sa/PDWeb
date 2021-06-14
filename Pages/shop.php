@@ -84,6 +84,8 @@ foreach ($id as $value){
         @$_SESSION['nb_tot_art']+=$nb;
         @$_SESSION['tot_achat']+=$total;
         @$_SESSION['panier'][$value]+=$nb;
+        header('location:shop.php');
+        exit();
     }
 }
 //<!-- Pied de page-->

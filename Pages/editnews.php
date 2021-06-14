@@ -1,14 +1,13 @@
 <?php
 @session_start();
-
-include_once("./Commons/header.php");
-
 if($_SESSION['status']!=true){?>
     <br/><br/><br/><br/>
     <h1 class="text-center text-danger">!!! Vous n'êtes pas autorisé à acceder à cette page !!!</h1>
     <?php header('Refresh: 2; URL=index.php');
     exit();
 }
+
+include_once("./Commons/header.php");
 
 @$id_user = $_SESSION['id'];
 @$titre = $_POST['titre'];

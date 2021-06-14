@@ -1,18 +1,16 @@
 <?php require 'commons/header.php';
 require 'Commons/connexionBdd.php';
-?>
 //confirmation de l'inscription
 
-<?php
 //si il ya des parametres qui sont passé par l'URL
-if($_GET){
-//si l'email est passé par l'URL
-if(isset($_GET['email'])){
-	$email = $_GET['email'];//recuperer la valeur de l'email ds une variable
-}
-//si le token est passé par l'URL
-if(isset($_GET['token'])){
-	$token = $_GET['token'];
+if(isset($_GET)){
+    //si l'email est passé par l'URL
+    if(isset($_GET['email'])){
+        $email = $_GET['email'];//recuperer la valeur de l'email ds une variable
+    }
+    //si le token est passé par l'URL
+    if(isset($_GET['token'])){
+        $token = $_GET['token'];
 }
 
 //on verifie si les deux variable ne sont pas vides
@@ -43,6 +41,7 @@ if(!empty($email) && !empty($token)){
 			}
 		}
 }
+header('location:login.php');
 }
 
 

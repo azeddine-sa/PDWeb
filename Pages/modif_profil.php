@@ -1,4 +1,12 @@
-<?php require 'commons/header.php';
+<?php
+session_start();
+if($_SESSION['autoriser']!=true){?>
+    <br/><br/><br/><br/>
+    <h1 class="text-center text-danger">!!! Vous n'êtes pas autorisé à acceder à cette page !!!</h1>
+    <?php header('Refresh: 2; URL=index.php');
+    exit();
+}
+require 'commons/header.php';
 require'Commons/connexionBdd.php'?>
 <title>Modification du Profil</title>
 
@@ -11,11 +19,11 @@ require'Commons/connexionBdd.php'?>
                  cp=:cp, commune=:commune, datenaissance=:datenaissance WHERE id_user=:id_user' );
       //login = :login, pass = :password
 
-      $requete->bindvalue(':nom', $_POST['nom']);
-      $requete->bindvalue(':prenom', $_POST['prenom']);
-      $requete->bindvalue(':adresse', $_POST['adresse']);
-      $requete->bindvalue(':cp', $_POST['cp']);
-      $requete->bindvalue(':commune', $_POST['commune']);
+      $requete->bindvalue(':nom', htmlspecialchars($_POST['nom']));
+      $requete->bindvalue(':prenom', htmlspecialchars($_POST['prenom']));
+      $requete->bindvalue(':adresse', htmlspecialchars($_POST['adresse']));
+      $requete->bindvalue(':cp', htmlspecialchars($_POST['cp']));
+      $requete->bindvalue(':commune', htmlspecialchars($_POST['commune']));
       $requete->bindvalue(':datenaissance', $_POST['ddn']);
       $requete->bindvalue(':id_user', $id);
 

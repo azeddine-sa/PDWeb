@@ -7,10 +7,10 @@ if(@$_SESSION["autoriser"]=="oui"){
 }
 
 //creation de variable reprenant les saisies utilisateur
-@$nom=$_POST["nom"];
-@$prenom=$_POST["prenom"];
-@$login=$_POST["login"];
-@$email=$_POST["email"];
+@$nom=htmlspecialchars($_POST["nom"]);
+@$prenom=htmlspecialchars($_POST["prenom"]);
+@$login=htmlspecialchars($_POST["login"]);
+@$email=htmlspecialchars($_POST["email"]);
 @$pass=$_POST["pass"];
 @$repass=$_POST["repass"];
 @$valider=$_POST["valider"];

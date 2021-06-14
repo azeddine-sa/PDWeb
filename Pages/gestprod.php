@@ -4,7 +4,14 @@
 //Header avec class BS
 include_once("./Commons/header.php");
 include("./Commons/connexionBdd.php");
-include("./PHP/codegestprod.php") ?>
+include("./PHP/codegestprod.php");
+
+if($_SESSION['status']!=true){?>
+    <br/><br/><br/><br/>
+    <h1 class="text-center text-danger">!!! Vous n'êtes pas autorisé à acceder à cette page !!!</h1>
+    <?php header('Refresh: 2; URL=index.php');
+    exit();
+}?>?>
 
 <title>Gestion des produits</title>
 

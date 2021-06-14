@@ -4,7 +4,14 @@
 //Header avec class BS
 include_once("./Commons/header.php");
 //connexion à la bd
-include("Commons/connexionBdd.php");?>
+include("Commons/connexionBdd.php");
+
+if($_SESSION['status']!=true){?>
+    <br/><br/><br/><br/>
+    <h1 class="text-center text-danger">!!! Vous n'êtes pas autorisé à acceder à cette page !!!</h1>
+    <?php header('Refresh: 2; URL=index.php');
+    exit();
+}?>
 
 <title>Consulter les connexions d'un UM</title>
 

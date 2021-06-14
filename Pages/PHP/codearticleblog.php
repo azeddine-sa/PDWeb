@@ -2,8 +2,8 @@
 @session_start();
 $id = $_GET['id'];
 @$id_user = $_SESSION['id'];
-@$titre = $_POST['titre'];
-@$contenu = $_POST['msg'];
+@$titre = htmlspecialchars($_POST['titre']);
+@$contenu = htmlspecialchars($_POST['msg']);
 @$valider= $_POST['valider'];
 
 

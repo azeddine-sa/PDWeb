@@ -14,6 +14,9 @@
     //Si la variable de session nb tot article n'existe pas, initialisation à non
     if(!isset($_SESSION['autoriser']))
         $_SESSION['autoriser']='non';
+    //Si la variable de session status n'existe pas, initialisation à false
+    if(!isset($_SESSION['status']))
+        $_SESSION['status']=false;
 
     //recupere les articles et leur prix
     $prod=$bdd->prepare("SELECT * From produits");
@@ -30,12 +33,14 @@
     ?>
     <title> Acceuil </title>
 
-
-
-    <h1 class="text-center text-black"> Bienvue sur Sa&Ben.be</h1>
-
     <!-- Contenu du site-->
     <div class="border m-2 p-2 ">  
+        <?php
+        //Affichage des messages d'erreurs formulaire SI il y en a-->
+        if(!empty($message)){ ?>
+            <div id="message"><?php echo $message ?></div>
+        <?php }?>
+        <h1 class="text-center text-black"> Bienvue sur Sa&Ben.be</h1>
         <?php
         ///si l'utilisateur est pas connecté
         //infos & espace connexion

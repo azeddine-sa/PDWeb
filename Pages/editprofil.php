@@ -1,5 +1,11 @@
 <?php require 'commons/header.php';
-require 'Commons/connexionBdd.php' ?>
+require 'Commons/connexionBdd.php';
+if($_SESSION['status']!=true){?>
+    <br/><br/><br/><br/>
+    <h1 class="text-center text-danger">!!! Vous n'êtes pas autorisé à acceder à cette page !!!</h1>
+    <?php header('Refresh: 2; URL=index.php');
+    exit();
+}?>
 <title>Modification du Profil</title>
 
 <?php

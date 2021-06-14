@@ -78,8 +78,9 @@ if(isset($valider))
            votre adresse e-mail que vous avez fournie. 
            Vous devriez bientôt les recevoir.";
         }
-    }
-    else
+    }elseif($result['indesirable']==1){
+        $message = "Votre compte est bloqué";
+    } else
     {
         $passwordIsOk = password_verify($password, $result['pass']);
 

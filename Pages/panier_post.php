@@ -107,6 +107,16 @@ if ((isset($_POST['validerpanier']))) {
         {
             $message1 =  "Nous vous avons envoyé un email de validation de votre panier.";
         }
+        if(!empty($message)){ ?>
+            <br/><br/><br/>
+            <h1 id="message"> <?=$message ?></h1>
+        <?php }
+        if(!empty($message1)){ ?>
+            <br/><br/><br/>
+            <h1 id="message"><?=$message1?></h1>
+        <?php }
+        header('Refresh: 2; URL=index.php');
+        exit();
     }else{
         header("location:login.php");
         exit();

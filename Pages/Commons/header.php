@@ -46,17 +46,6 @@
                                     <a class="nav-link" href="minichat.php">Minichat</a>
                                 </li>
                                 <!-- Lien menu deroulant JS Bootstrap-->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Contact
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="../Pages/contact.php">Contactez-nous</a>
-                                        <?php if($autoriser!="oui") { ?>
-                                        <a class="dropdown-item" href="../Pages/inscription.php">Inscription</a>
-                                        <?php } ?>
-                                    </div>
-                                </li>
                                 <?php
                                     // Si l'utilisateur est un admin, ajout onglet "menu administration" dans le menu
                                     if($autoriser=="oui" && $_SESSION['status']==true){ ?>
